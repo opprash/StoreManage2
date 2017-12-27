@@ -91,12 +91,17 @@ public class Login extends JFrame implements ActionListener{
             ms.setU(u);
             ms.setMesType(MessageType.message_login);
 
-            System.out.println(ms.getU().getUsername());
+//            System.out.println(ms.getU().getUsername());
+
             ClientUser clientUser = new ClientUser();
 
-            if(clientUser.checkUser(ms))
+            u.setType(clientUser.checkUser(ms));
+            if(u.getType() != 0)
             {
                 System.out.println("success");
+                this.dispose();
+                System.out.println(u.getType());
+                new MainView(u);
             }
             else
             {

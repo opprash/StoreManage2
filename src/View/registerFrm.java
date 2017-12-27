@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 
+import Common.Message;
+import Common.MessageType;
+import Common.User;
 import Model.*;
 import jdk.nashorn.internal.scripts.JO;
 
@@ -75,19 +78,44 @@ public class registerFrm extends JFrame implements ActionListener{
             {
                 JOptionPane.showMessageDialog(this,"密码不能为空");
             }
-            if(checkEmpty.isEmpty(new String(pwd_jpf2.getPassword())))
+            else if(checkEmpty.isEmpty(new String(pwd_jpf2.getPassword())))
             {
                 JOptionPane.showMessageDialog(this,"请确认密码");
             }
-            if(!new String(pwd_jpf.getPassword()).equals(new String(pwd_jpf2.getPassword())))
+            else if(!new String(pwd_jpf.getPassword()).equals(new String(pwd_jpf2.getPassword())))
             {
                 JOptionPane.showMessageDialog(this,"两次输入密码不一致");
             }
 
             String name = name_jtf.getText();
             String pwd = new String(pwd_jpf.getPassword());
-            String pwd2 = new String(pwd_jpf2.getPassword());
 
+            User u = new User();
+            u.setUsername(name);
+            u.setUserpwd(pwd);
+
+            Message ms = new Message();
+            ms.setU(u);
+            ms.setMesType(MessageType.message_register);
+
+//            if()
+            ClientUser clientUser = new ClientUser();
+
+            u.setType(clientUser.checkUser(ms));
+
+//            System.out.println(ms.getU().getType());
+
+            if(u.getType() != 0)
+            {
+//                System.out.println("register succeed");
+                JOptionPane.showMessageDialog(this,"注册成功");
+//                System.out.println(u.getType());
+//                new MainView(u);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"注册失败");
+            }
 //            Connection con =
         }
         else if(e.getSource() == cancle_jb)

@@ -12,9 +12,9 @@ public class ClientConServer {
 
     public Socket s;
 
-    public boolean SendLoginInfoToServer(Message m)
+    public int SendLoginInfoToServer(Message m)
     {
-        boolean b = false;
+        int sym = 0;
         try {
             s = new Socket("127.0.0.1",8888);
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -26,7 +26,11 @@ public class ClientConServer {
 
             if(ms.getMesType().equals(MessageType.message_login_success))
             {
-                b = true;
+                sym = ms.getU().getType();
+            }
+            else if(ms.getMesType().equals(MessageType.message_register_success))
+            {
+                sym = ms.getU().getType();
             }
 //            System.out.println(ms.getMesType().toString());
 
@@ -35,6 +39,6 @@ public class ClientConServer {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return b;
+        return sym;
     }
 }

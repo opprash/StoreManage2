@@ -4,7 +4,7 @@ import Common.*;
 
 public class ClientUser {
 
-    public boolean checkUser(Message ms )
+    public int checkUser(Message ms )
     {
         return new ClientConServer().SendLoginInfoToServer(ms);
     }
