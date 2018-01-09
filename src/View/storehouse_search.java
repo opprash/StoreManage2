@@ -51,7 +51,7 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
         jp2 = new JPanel();
         jsp = new JScrollPane();
         table = new JTable();
-        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"≤÷ø‚±‡∫≈","≤÷ø‚√˚◊÷","≤÷ø‚¥Û–°","≤÷ø‚µÿ÷∑"}));
+        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"≤÷ø‚±‡∫≈","≤÷ø‚√˚◊÷","≤÷ø‚¥Û–°","≤÷ø‚“—”√ø’º‰","≤÷ø‚ø…”√ø’º‰","≤÷ø‚µÿ÷∑"}));
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
@@ -109,11 +109,11 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
         ClientUser clientUser = new ClientUser();
 
         Vector v = clientUser.getTable(ms);
-        for(int i=0;i<v.size()/4;i++)
+        for(int i=0;i<v.size()/6;i++)
         {
             Vector v2 = new Vector();
-            for (int j=0;j<4;j++) {
-                v2.addElement(v.get(j+i*4));
+            for (int j=0;j<6;j++) {
+                v2.addElement(v.get(j+i*6));
             }
             dtm.addRow(v2);
         }

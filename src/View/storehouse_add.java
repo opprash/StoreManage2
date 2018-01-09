@@ -14,8 +14,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
 
 public class storehouse_add extends JFrame implements ActionListener {
 
-    JLabel Wno,Wname,Wsize,Waddr;
-    JTextField Wno_jtf,Wname_jtf,Wsize_jtf,Waddr_jtf;
+    JLabel Wno,Wname,Wsize,Wu_size,Wa_size,Waddr;
+    JTextField Wno_jtf,Wname_jtf,Wsize_jtf,Wu_size_jtf,Waddr_jtf;
     JButton enter_jb,cancle_jb;
 
     public storehouse_add()
@@ -23,10 +23,12 @@ public class storehouse_add extends JFrame implements ActionListener {
         Wno = new JLabel("仓库代码");
         Wname = new JLabel("仓库名称");
         Wsize = new JLabel("仓库大小");
+        Wu_size = new JLabel("已用空间");
         Waddr = new JLabel("仓库地址");
         Wno_jtf = new JTextField(25);
         Wname_jtf = new JTextField(25);
         Wsize_jtf = new JTextField(25);
+        Wu_size_jtf = new JTextField(25);
         Waddr_jtf = new JTextField(25);
 
         enter_jb = new JButton("确认");
@@ -40,9 +42,10 @@ public class storehouse_add extends JFrame implements ActionListener {
         this.add(Wno);this.add(Wno_jtf);
         this.add(Wname);this.add(Wname_jtf);
         this.add(Wsize);this.add(Wsize_jtf);
+        this.add(Wu_size);this.add(Wu_size_jtf);
         this.add(Waddr);this.add(Waddr_jtf);
         this.add(enter_jb);this.add(cancle_jb);
-        this.setSize(250,125);
+        this.setSize(250,145);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -57,23 +60,34 @@ public class storehouse_add extends JFrame implements ActionListener {
                     || checkEmpty.isEmpty(Waddr_jtf.getText()) || checkEmpty.isEmpty(Wsize_jtf.getText()))
             {
                 JOptionPane.showMessageDialog(this,"请补充空白项");
+                return;
             }
             else if(Wno_jtf.getText().length()!=2)
             {
                 JOptionPane.showMessageDialog(this,"客户代码需为2位");
+                return;
+            }
+            else if(Integer.parseInt(Wu_size_jtf.getText()) > Integer.parseInt(Wsize_jtf.getText()))
+            {
+                JOptionPane.showMessageDialog(this,"数据错误,请确认");
+                return;
             }
 
             String Wno = Wno_jtf.getText();
             String Wname = Wname_jtf.getText().toString();
             int Wsize = Integer.parseInt(Wsize_jtf.getText());
-            System.out.println(Wsize);
+            int Wu_size = Integer.parseInt(Wu_size_jtf.getText());
+            int Wa_size = Wsize - Wu_size;
+//            System.out.println(Wsize);
             String Waddr = Waddr_jtf.getText().toString();
             Vector v = new Vector();
             v.addElement(Wno);
             v.addElement(Wname);
             v.addElement(Wsize);
+            v.addElement(Wu_size);
+            v.addElement(Wa_size);
             v.addElement(Waddr);
-            System.out.println(v.get(2));
+//            System.out.println(v.get(2));
 
 //            for(int i=0;i<4;i++)
 //            {

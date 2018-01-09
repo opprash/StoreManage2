@@ -8,13 +8,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import Model.checkEmpty;
 
 public class Input_add extends JFrame implements ActionListener,ItemListener{
 
-    JLabel Gno,Gname,Tno,Tname,Sno,Wno,Wname,Inum;
-    JTextField Gno_jtf,Gname_jtf,Tno_jtf,Tname_jtf,Sno_jtf,Wno_jtf,Inum_jtf;
-    JComboBox Gno_jcb,Gname_jcb,Tno_jcb,Sno_jcb,Wname_jcb;
+    JLabel Gno,Gname,Tno,Tname,Sno,Wno,Wname,Wa_size,Inum;
+    JTextField Gno_jtf,Tno_jtf,Tname_jtf,Sno_jtf,Wno_jtf,Wa_size_jtf,Inum_jtf;
+    JComboBox Gname_jcb,Wname_jcb;
     JButton enter_jb,cancle_jb;
     Vector v1,v2,v3,v4;
 
@@ -28,6 +30,7 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
         Sno = new JLabel("供应商编号");
         Wno = new JLabel("存放仓库号");
         Wname = new JLabel("仓库名称");
+        Wa_size = new JLabel("剩余空间");
         Inum = new JLabel("进货数量");
 
         Gno_jtf = new JTextField(20);
@@ -40,6 +43,8 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
         Sno_jtf.setEditable(false);
         Wno_jtf = new JTextField(20);
         Wno_jtf.setEditable(false);
+        Wa_size_jtf = new JTextField(20);
+        Wa_size_jtf.setEditable(false);
         Inum_jtf = new JTextField(20);
 
         enter_jb = new JButton("确认");
@@ -66,7 +71,7 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
         while(i < v3.size())
         {
             v4.addElement(v3.get(i));
-            i+=4;
+            i+=6;
         }
 
         Gname_jcb = new JComboBox(v2);
@@ -94,6 +99,8 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
         this.add(Wno_jtf);
         this.add(Wname);
         this.add(Wname_jcb);
+        this.add(Wa_size);
+        this.add(Wa_size_jtf);
         this.add(Inum);
         this.add(Inum_jtf);
         this.add(enter_jb);
@@ -106,10 +113,6 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
     }
 
 
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == enter_jb)
@@ -117,6 +120,12 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
             if(Wname_jcb.getSelectedItem()==null || Gname_jcb.getSelectedItem()==null || Inum_jtf.getText()==null)
             {
                 JOptionPane.showMessageDialog(this,"请补全空白项");
+                return;
+            }
+            else if(Integer.parseInt(Wa_size_jtf.getText()) < Integer.parseInt(Inum_jtf.getText()))
+            {
+                JOptionPane.showMessageDialog(this,"仓库空间不足,请调整入库量");
+                return;
             }
             Vector v = new Vector();
             v.addElement((String)Gno_jtf.getText());
@@ -126,7 +135,9 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
             v.addElement((String)Sno_jtf.getText());
             v.addElement((String)Wno_jtf.getText());
             v.addElement((String)Inum_jtf.getText());
-            v.addElement(new java.util.Date().toString());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+            v.addElement(df.format(new Date()));
 
             Message m = new Message();
             m.setV(v);
@@ -135,6 +146,13 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
             if(clientUser.SendInfo(m)!=0)
             {
                 JOptionPane.showMessageDialog(this,"入库成功");
+                Wname_jcb.setSelectedIndex(-1);
+                Gname_jcb.setSelectedIndex(-1);
+                Gno_jtf.setText("");
+                Tno_jtf.setText("");
+                Tname_jtf.setText("");
+                Sno_jtf.setText("");
+                Wno_jtf.setText("");
             }
             else JOptionPane.showMessageDialog(this,"入库失败");
 //            if()
@@ -172,11 +190,12 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
         else if(e.getItemSelectable() == Wname_jcb)
         {
             String Wname = (String)Wname_jcb.getSelectedItem();
-            for(int i = 1;i<v3.size();i++)
+            for(int i = 1;i<v3.size();i+=6)
             {
                 if(v3.get(i).equals(Wname))
                 {
                     Wno_jtf.setText((String)v3.get(i-1));
+                    Wa_size_jtf.setText(String.valueOf(v3.get(i+3)));
                 }
             }
         }

@@ -20,63 +20,63 @@ public class MainView extends JFrame implements ActionListener{
     {
         jmb = new JMenuBar();
         menu1 = new JMenu("账户管理");
-        menu2 = new JMenu("查询");
-        menu3 = new JMenu("货物管理");
+        menu2 = new JMenu("帮助");
+//        menu3 = new JMenu("货物管理");
 
         item1_m1 = new JMenuItem("用户管理");
-//        item2_m1 = new JMenuItem("增减用户");
+        item2_m1 = new JMenuItem("新增用户");
         item1_m1.addActionListener(this);
-//        item2_m1.addActionListener(this);
+        item2_m1.addActionListener(this);
 
-        item1_m2 = new JMenuItem("存储查询");
-        item2_m2 = new JMenuItem("供应商查询");
-        item3_m2 = new JMenuItem("客户查询");
-        item4_m2 = new JMenuItem("仓库查询");
-        item5_m2 = new JMenuItem("入库记录查询");
-        item6_m2 = new JMenuItem("出库记录查询");
-        item1_m2.addActionListener(this);
-        item2_m2.addActionListener(this);
-        item3_m2.addActionListener(this);
-        item4_m2.addActionListener(this);
-        item5_m2.addActionListener(this);
-        item6_m2.addActionListener(this);
+        item1_m2 = new JMenuItem("联系我们");
+//        item2_m2 = new JMenuItem("供应商查询");
+//        item3_m2 = new JMenuItem("客户查询");
+//        item4_m2 = new JMenuItem("仓库查询");
+//        item5_m2 = new JMenuItem("入库记录查询");
+//        item6_m2 = new JMenuItem("出库记录查询");
+//        item1_m2.addActionListener(this);
+//        item2_m2.addActionListener(this);
+//        item3_m2.addActionListener(this);
+//        item4_m2.addActionListener(this);
+//        item5_m2.addActionListener(this);
+//        item6_m2.addActionListener(this);
 
 
-//        item1_m3 = new JMenuItem("入库管理");
-//        item2_m3 = new JMenuItem("出库管理");
-        item3_m3 = new JMenuItem("供应商管理");
-        item4_m3 = new JMenuItem("客户管理");
-        item5_m3 = new JMenuItem("仓库管理");
-//        item1_m3.addActionListener(this);
-//        item2_m3.addActionListener(this);
-        item3_m3.addActionListener(this);
-        item4_m3.addActionListener(this);
-        item5_m3.addActionListener(this);
+////        item1_m3 = new JMenuItem("入库管理");
+////        item2_m3 = new JMenuItem("出库管理");
+//        item3_m3 = new JMenuItem("供应商管理");
+//        item4_m3 = new JMenuItem("客户管理");
+//        item5_m3 = new JMenuItem("仓库管理");
+////        item1_m3.addActionListener(this);
+////        item2_m3.addActionListener(this);
+//        item3_m3.addActionListener(this);
+//        item4_m3.addActionListener(this);
+//        item5_m3.addActionListener(this);
 
         if(u.getType() == 1)
         {
             menu1.add(item1_m1);
-//            menu1.add(item2_m1);
+            menu1.add(item2_m1);
             jmb.add(menu1);
         }
 
         menu2.add(item1_m2);
-        menu2.add(item2_m2);
-        menu2.add(item3_m2);
-        menu2.add(item4_m2);
-        menu2.add(item5_m2);
-        menu2.add(item6_m2);
+//        menu2.add(item2_m2);
+//        menu2.add(item3_m2);
+//        menu2.add(item4_m2);
+//        menu2.add(item5_m2);
+//        menu2.add(item6_m2);
         jmb.add(menu2);
-
-        if(u.getType() == 1 || u.getType() == 2)
-        {
-//            menu3.add(item1_m3);
-//            menu3.add(item2_m3);
-            menu3.add(item3_m3);
-            menu3.add(item4_m3);
-            menu3.add(item5_m3);
-            jmb.add(menu3);
-        }
+//
+//        if(u.getType() == 1 || u.getType() == 2)
+//        {
+////            menu3.add(item1_m3);
+////            menu3.add(item2_m3);
+//            menu3.add(item3_m3);
+//            menu3.add(item4_m3);
+//            menu3.add(item5_m3);
+//            jmb.add(menu3);
+//        }
 
 
         JTabbedPane jtap = new JTabbedPane();
@@ -92,8 +92,8 @@ public class MainView extends JFrame implements ActionListener{
         jp2.add(new supplier_search(u));
         jp3.add(new customs_search(u));
         jp4.add(new storehouse_search(u));
-//        jp5.add(new Input_search());
-
+        jp5.add(new Input_search());
+        jp6.add(new Output_search());
 
         jtap.add(jp1,"存储情况");
         jtap.add(jp2,"供应商管理");
@@ -125,6 +125,10 @@ public class MainView extends JFrame implements ActionListener{
         if(e.getSource() == item1_m1)
         {
             new UserManage();
+        }
+        else if(e.getSource() == item2_m1)
+        {
+            new registerFrm();
         }
     }
 }
