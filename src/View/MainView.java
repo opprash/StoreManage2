@@ -13,7 +13,7 @@ public class MainView extends JFrame implements ActionListener{
     JMenuItem item1_m1,item2_m1;
     JMenuItem item1_m2,item2_m2,item3_m2,item4_m2,item5_m2,item6_m2;
     JMenuItem item1_m3,item2_m3,item3_m3,item4_m3,item5_m3;
-    JPanel jp1,jp2,jp3,jp4,jp5,jp6;
+    JPanel jp1,jp2,jp3,jp4,jp5,jp6,jp7,jp8;
     JLabel top_img;
 
     public MainView(User u)
@@ -86,25 +86,31 @@ public class MainView extends JFrame implements ActionListener{
         jp4 = new JPanel();
         jp5 = new JPanel();
         jp6 = new JPanel();
+        jp7 = new JPanel();
+        jp8 = new JPanel();
         top_img = new JLabel(new ImageIcon("/home/sephiroth/桌面/StoreManage/hy2.jpg"));
 
         jp1.add(new store_search(u));
-        jp2.add(new supplier_search(u));
-        jp3.add(new customs_search(u));
-        jp4.add(new storehouse_search(u));
-        jp5.add(new Input_search());
-        jp6.add(new Output_search());
+        jp2.add(new store_detl_search(u));
+        jp3.add(new OutOfDate_search());
+        jp4.add(new supplier_search(u));
+        jp5.add(new customs_search(u));
+        jp6.add(new storehouse_search(u));
+        jp7.add(new Input_search());
+        jp8.add(new Output_search());
 
-        jtap.add(jp1,"存储情况");
-        jtap.add(jp2,"供应商管理");
-        jtap.add(jp3,"客户管理");
-        jtap.add(jp4,"仓库管理");
-        jtap.add(jp5,"入库记录查询");
-        jtap.add(jp6,"出库记录查询");
+        jtap.add(jp1,"存储概况");
+        jtap.add(jp2,"存储详情");
+        jtap.add(jp3,"到期货物");
+        jtap.add(jp4,"供应商管理");
+        jtap.add(jp5,"客户管理");
+        jtap.add(jp6,"仓库管理");
+        jtap.add(jp7,"入库记录查询");
+        jtap.add(jp8,"出库记录查询");
 
 
         this.setJMenuBar(jmb);
-        this.setSize(550,600);
+        this.setSize(800,600);
         this.setTitle("仓库管理系统");
         this.add(top_img,"North");
         this.add(jtap,"Center");

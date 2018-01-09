@@ -53,7 +53,7 @@ public class Input_search extends JInternalFrame implements ActionListener{
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
-        table.setPreferredScrollableViewportSize(new Dimension(500,250));
+        table.setPreferredScrollableViewportSize(new Dimension(750,250));
 //        table.addMouseListener(this);
 
         jsp.setViewportView(table);

@@ -140,7 +140,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
             v.addElement((String)Cno_jtf.getText());
             v.addElement((String)Cname_jcb.getSelectedItem());
             v.addElement((String)Onum_jtf.getText());
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
             v.addElement(df.format(new Date()));
 
             Message m = new Message();

@@ -17,7 +17,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
-public class store_search extends JInternalFrame implements ActionListener{
+public class store_detl_search extends JInternalFrame implements ActionListener{
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
@@ -27,7 +27,7 @@ public class store_search extends JInternalFrame implements ActionListener{
     JComboBox jcb;
     JPanel jp1,jp2,jp3;
 
-    public store_search(User u)
+    public store_detl_search(User u)
     {
         init(u);
         try {
@@ -51,7 +51,7 @@ public class store_search extends JInternalFrame implements ActionListener{
         jp2 = new JPanel();
         jsp = new JScrollPane();
         table = new JTable();
-        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物编号","货物名称","类型编号","类型名称","仓库编号","仓库名称","存储数量"}));
+        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物批次","货物编号","货物名称","类型编号","类型名称","仓库编号","仓库名称","存储数量","生产日期","到期时间"}));
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
@@ -70,16 +70,12 @@ public class store_search extends JInternalFrame implements ActionListener{
 //        UserTable.setPreferredScrollableViewportSize(new Dimension(450,100));
 
         jp3 = new JPanel();
-        in_jb = new JButton("入库操作");
         out_jb = new JButton("出库操作");
         if(u.getType() == 3)
         {
-            in_jb.setEnabled(false);
             out_jb.setEnabled(false);
         }
-        in_jb.addActionListener(this);
         out_jb.addActionListener(this);
-        jp3.add(in_jb);
         jp3.add(out_jb);
 
 
@@ -104,16 +100,16 @@ public class store_search extends JInternalFrame implements ActionListener{
         dtm.setRowCount(0);
         Message ms = new Message();
         ms.setCon(name);
-        ms.setMesType(MessageType.message_select_storeTable);
+        ms.setMesType(MessageType.message_select_storeTable_detl);
 
         ClientUser clientUser = new ClientUser();
 
         Vector v = clientUser.getTable(ms);
-        for(int i=0;i<v.size()/7;i++)
+        for(int i=0;i<v.size()/10;i++)
         {
             Vector v2 = new Vector();
-            for (int j=0;j<7;j++) {
-                v2.addElement(v.get(j+i*7));
+            for (int j=0;j<10;j++) {
+                v2.addElement(v.get(j+i*10));
             }
             dtm.addRow(v2);
         }
@@ -135,10 +131,6 @@ public class store_search extends JInternalFrame implements ActionListener{
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        }
-        else if(e.getSource() == in_jb)
-        {
-            new Input_add();
         }
         else if(e.getSource() == out_jb)
         {

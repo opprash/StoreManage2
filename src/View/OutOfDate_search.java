@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class Output_search extends JInternalFrame implements ActionListener{
+public class OutOfDate_search extends JInternalFrame implements ActionListener{
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
@@ -25,7 +25,7 @@ public class Output_search extends JInternalFrame implements ActionListener{
     JPanel jp1,jp2,jp3;
     String Cno;
 
-    public Output_search()
+    public OutOfDate_search()
     {
         init();
         try {
@@ -49,7 +49,7 @@ public class Output_search extends JInternalFrame implements ActionListener{
         jp2 = new JPanel();
         jsp = new JScrollPane();
         table = new JTable();
-        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物编号","货物名称","类型码","类型名称","仓存编号","客户编号","客户名称","出库数量","时间"}));
+        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物批次","货物编号","货物名称","类型编号","类型名称","仓库编号","仓库名称","存储数量","生产日期","到期时间"}));
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
@@ -96,16 +96,16 @@ public class Output_search extends JInternalFrame implements ActionListener{
         dtm.setRowCount(0);
         Message ms = new Message();
 //        ms.setCon(String.valueOf(keywords_jtf.getText()));
-        ms.setMesType(MessageType.message_select_outputTable);
+        ms.setMesType(MessageType.message_select_OutOfDate);
 
         ClientUser clientUser = new ClientUser();
 
         Vector v = clientUser.getTable(ms);
-        for(int i=0;i<v.size()/9;i++)
+        for(int i=0;i<v.size()/10;i++)
         {
             Vector v2 = new Vector();
-            for (int j=0;j<9;j++) {
-                v2.addElement(v.get(j+i*9));
+            for (int j=0;j<10;j++) {
+                v2.addElement(v.get(j+i*10));
             }
             dtm.addRow(v2);
         }
