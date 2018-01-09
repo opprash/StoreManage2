@@ -27,9 +27,9 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
     JPanel jp1,jp2,jp3;
     String Cno;
 
-    public customs_search()
+    public customs_search(User u)
     {
-        init();
+        init(u);
         try {
             fillTable(null);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
         }
     }
 
-    void init()
+    void init(User u)
     {
         jp1 = new JPanel();
         search_jbl = new JLabel("客户编号:");
@@ -75,6 +75,11 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
         add_jb.addActionListener(this);
         delete_jb = new JButton("删除客户");
         delete_jb.addActionListener(this);
+        if(u.getType() == 3)
+        {
+            add_jb.setEnabled(false);
+            delete_jb.setEnabled(false);
+        }
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -114,10 +119,10 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
 //        dtm.addRow(v);
     }
 
-    public static void main(String [] args)
-    {
-        new customs_search();
-    }
+//    public static void main(String [] args)
+//    {
+//        new customs_search();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

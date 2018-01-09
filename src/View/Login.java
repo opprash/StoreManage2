@@ -8,7 +8,7 @@ import java.sql.*;
 
 import Common.*;
 import Model.*;
-import Dao.*;
+//import Dao.*;
 import Model.*;
 
 public class Login extends JFrame implements ActionListener{
@@ -20,7 +20,7 @@ public class Login extends JFrame implements ActionListener{
     JButton enter_jb,register_jb;
 
     sqlConnection sql = new sqlConnection();
-    dao_Login daoLogin = new dao_Login();
+//    dao_Login daoLogin = new dao_Login();
 
     public Login()
     {
@@ -100,7 +100,7 @@ public class Login extends JFrame implements ActionListener{
             {
                 System.out.println("success");
                 this.dispose();
-                System.out.println(u.getType());
+//                System.out.println(u.getType());
                 new MainView(u);
             }
             else

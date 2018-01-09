@@ -28,9 +28,9 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
     JPanel jp1,jp2,jp3;
     String Sno;
 
-    public supplier_search()
+    public supplier_search(User u)
     {
-        init();
+        init(u);
         try {
             fillTable(null);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
         }
     }
 
-    void init()
+    void init(User u)
     {
         jp1 = new JPanel();
         search_jbl = new JLabel("供应商编号:");
@@ -76,6 +76,11 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
         add_jb.addActionListener(this);
         delete_jb = new JButton("删除供应商");
         delete_jb.addActionListener(this);
+        if(u.getType() == 3)
+        {
+            add_jb.setEnabled(false);
+            delete_jb.setEnabled(false);
+        }
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -116,10 +121,10 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
 //        dtm.addRow(v);
     }
 
-    public static void main(String [] args)
-    {
-        new supplier_search();
-    }
+//    public static void main(String [] args)
+//    {
+//        new supplier_search();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -88,10 +88,10 @@ public class MainView extends JFrame implements ActionListener{
         jp6 = new JPanel();
         top_img = new JLabel(new ImageIcon("/home/sephiroth/×ÀÃæ/StoreManage/hy2.jpg"));
 
-        jp1.add(new store_search());
-        jp2.add(new supplier_search());
-        jp3.add(new customs_search());
-        jp4.add(new storehouse_search());
+        jp1.add(new store_search(u));
+        jp2.add(new supplier_search(u));
+        jp3.add(new customs_search(u));
+        jp4.add(new storehouse_search(u));
 //        jp5.add(new Input_search());
 
 

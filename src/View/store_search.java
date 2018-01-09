@@ -26,9 +26,9 @@ public class store_search extends JInternalFrame implements ActionListener{
     JComboBox jcb;
     JPanel jp1,jp2,jp3;
 
-    public store_search()
+    public store_search(User u)
     {
-        init();
+        init(u);
         try {
             fillTable(null);
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class store_search extends JInternalFrame implements ActionListener{
         }
     }
 
-    void init()
+    void init(User u)
     {
         jp1 = new JPanel();
         search_jbl = new JLabel("商品编号:");
@@ -71,6 +71,11 @@ public class store_search extends JInternalFrame implements ActionListener{
         jp3 = new JPanel();
         in_jb = new JButton("入库操作");
         out_jb = new JButton("出库操作");
+        if(u.getType() == 3)
+        {
+            in_jb.setEnabled(false);
+            out_jb.setEnabled(false);
+        }
         in_jb.addActionListener(this);
         out_jb.addActionListener(this);
         jp3.add(in_jb);
@@ -114,10 +119,10 @@ public class store_search extends JInternalFrame implements ActionListener{
 //        dtm.addRow(v);
     }
 
-    public static void main(String [] args)
-    {
-        new store_search();
-    }
+//    public static void main(String [] args)
+//    {
+//        new store_search();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -132,7 +137,7 @@ public class store_search extends JInternalFrame implements ActionListener{
         }
         else if(e.getSource() == in_jb)
         {
-
+            new Input_add();
         }
         else if(e.getSource() == out_jb)
         {

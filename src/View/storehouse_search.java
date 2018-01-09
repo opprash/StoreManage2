@@ -27,9 +27,9 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
     JPanel jp1,jp2,jp3;
     String Wno;
 
-    public storehouse_search()
+    public storehouse_search(User u)
     {
-        init();
+        init(u);
         try {
             fillTable(null);
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
         }
     }
 
-    void init()
+    void init(User u)
     {
         jp1 = new JPanel();
         search_jbl = new JLabel("²Ö¿â±àºÅ:");
@@ -76,6 +76,11 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
         add_jb.addActionListener(this);
         delete_jb = new JButton("É¾³ý²Ö¿â");
         delete_jb.addActionListener(this);
+        if(u.getType() == 3)
+        {
+            add_jb.setEnabled(false);
+            delete_jb.setEnabled(false);
+        }
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -115,10 +120,10 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
 //        dtm.addRow(v);
     }
 
-    public static void main(String [] args)
-    {
-        new storehouse_search();
-    }
+//    public static void main(String [] args)
+//    {
+//        new storehouse_search();
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

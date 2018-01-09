@@ -166,7 +166,7 @@ public class UserManage extends JFrame implements ActionListener,MouseListener{
             ms.setMesType(MessageType.message_update_user);
 
             ClientUser clientUser = new ClientUser();
-            System.out.println("123");
+//            System.out.println("123");
             if(clientUser.updateUser(ms)!=0)
             {
                 JOptionPane.showMessageDialog(this,"ÐÞ¸Ä³É¹¦");
