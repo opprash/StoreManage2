@@ -13,4 +13,5 @@ public class Input_search extends JInternalFrame {
     JPanel jp1,jp2,jp3;
     String Cno;
 
+
 }
