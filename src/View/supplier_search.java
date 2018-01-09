@@ -73,7 +73,9 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
 
         jp3 = new JPanel();
         add_jb = new JButton("增加供应商");
+        add_jb.addActionListener(this);
         delete_jb = new JButton("删除供应商");
+        delete_jb.addActionListener(this);
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -132,6 +134,11 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
         else if(e.getSource() == add_jb)
         {
             new supplier_add();
+            try {
+                fillTable(null);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
         else if(e.getSource() == delete_jb)
         {
@@ -142,6 +149,11 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
             if(clientUser.SendInfo(ms)!=0)
             {
                 JOptionPane.showMessageDialog(this,"删除成功");
+                try {
+                    fillTable(null);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
             else JOptionPane.showMessageDialog(this,"删除失败");
         }

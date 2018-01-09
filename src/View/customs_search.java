@@ -12,17 +12,20 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Vector;
 
-public class customs_search extends JInternalFrame implements ActionListener{
+public class customs_search extends JInternalFrame implements ActionListener,MouseListener{
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
-    JButton search_jb;
+    JButton search_jb,add_jb,delete_jb;
     JTable table;
     JScrollPane jsp;
     JComboBox jcb;
     JPanel jp1,jp2,jp3;
+    String Cno;
 
     public customs_search()
     {
@@ -53,6 +56,7 @@ public class customs_search extends JInternalFrame implements ActionListener{
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
         table.setPreferredScrollableViewportSize(new Dimension(500,250));
+        table.addMouseListener(this);
 
         jsp.setViewportView(table);
         jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -66,8 +70,17 @@ public class customs_search extends JInternalFrame implements ActionListener{
 //        UserTable.setDefaultRenderer(Object.class,r);
 //        UserTable.setPreferredScrollableViewportSize(new Dimension(450,100));
 
+        jp3 = new JPanel();
+        add_jb = new JButton("增加客户");
+        add_jb.addActionListener(this);
+        delete_jb = new JButton("删除客户");
+        delete_jb.addActionListener(this);
+        jp3.add(add_jb);
+        jp3.add(delete_jb);
+
         this.add(jp1,"North");
         this.add(jp2,"Center");
+        this.add(jp3,"South");
         this.setSize(600,500);
 //        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -116,5 +129,55 @@ public class customs_search extends JInternalFrame implements ActionListener{
                 e1.printStackTrace();
             }
         }
+        else if(e.getSource() == add_jb)
+        {
+            new customs_add();
+        }
+        else if(e.getSource() == delete_jb)
+        {
+            Message ms = new Message();
+            ms.setCon(Cno);
+            ms.setMesType(MessageType.message_delete_customsTable);
+            ClientUser clientUser = new ClientUser();
+            if(clientUser.SendInfo(ms)!=0)
+            {
+                JOptionPane.showMessageDialog(this,"删除成功");
+                try {
+                    fillTable(null);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+            else JOptionPane.showMessageDialog(this,"删除失败");
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if(e.getSource() == table)
+        {
+            int row = table.getSelectedRow();
+            Cno = String.valueOf(table.getValueAt(row,0));
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

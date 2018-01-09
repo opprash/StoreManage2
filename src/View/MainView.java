@@ -126,41 +126,5 @@ public class MainView extends JFrame implements ActionListener{
         {
             new UserManage();
         }
-//        else if(e.getSource() == item1_m2)
-//        {
-//            new store_search();
-//        }
-//        else if(e.getSource() == item2_m2)
-//        {
-//            new supplier_search();
-//        }
-//        else if(e.getSource() == item3_m2)
-//        {
-//            new customs_search();
-//        }
-//        else if(e.getSource() == item4_m2)
-//        {
-//            new storehouse_search();
-//        }
-//        else if(e.getSource() == item5_m2)
-//        {
-//            new Input_search();
-//        }
-//        else if(e.getSource() == item6_m2)
-//        {
-//            new Output_search();
-//        }
-//        else if(e.getSource() == item3_m3)
-//        {
-//            new supplier_manage();
-//        }
-//        else if(e.getSource() == item4_m3)
-//        {
-//            new customs_manage();
-//        }
-//        else if(e.getSource() == item5_m3)
-//        {
-//            new store_manage();
-//        }
     }
 }

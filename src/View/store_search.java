@@ -20,7 +20,7 @@ public class store_search extends JInternalFrame implements ActionListener{
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
-    JButton search_jb;
+    JButton search_jb,in_jb,out_jb;
     JTable table;
     JScrollPane jsp;
     JComboBox jcb;
@@ -69,9 +69,17 @@ public class store_search extends JInternalFrame implements ActionListener{
 //        UserTable.setPreferredScrollableViewportSize(new Dimension(450,100));
 
         jp3 = new JPanel();
+        in_jb = new JButton("入库操作");
+        out_jb = new JButton("出库操作");
+        in_jb.addActionListener(this);
+        out_jb.addActionListener(this);
+        jp3.add(in_jb);
+        jp3.add(out_jb);
+
 
         this.add(jp1,"North");
         this.add(jp2,"Center");
+        this.add(jp3,"South");
 //        this.setMaximizable(true);
         this.setBorder(BorderFactory.createEmptyBorder());
         ((BasicInternalFrameUI)this.getUI()).setNorthPane(null);
@@ -115,12 +123,20 @@ public class store_search extends JInternalFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == search_jb)
         {
-            System.out.println("123");
+//            System.out.println("123");
             try {
                 fillTable(keywords_jtf.getText());
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+        }
+        else if(e.getSource() == in_jb)
+        {
+
+        }
+        else if(e.getSource() == out_jb)
+        {
+
         }
     }
 }
