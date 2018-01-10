@@ -15,9 +15,9 @@ import sun.plugin2.ipc.windows.WindowsNamedPipe;
 
 public class Output_add extends JFrame implements ActionListener,ItemListener{
 
-    JLabel Gno,Gname,Tno,Tname,Wno,Inum,Cno,Cname,Onum;
-    JTextField Gno_jtf,Tno_jtf,Tname_jtf,Inum_jtf,Cno_jtf,Onum_jtf;
-    JComboBox Gno_jcb,Gname_jcb,Wno_jcb,Cname_jcb;
+    JLabel SID,Gno,Gname,Tno,Tname,Wno,Inum,Cno,Cname,Onum;
+    JTextField SID_jtf,Gno_jtf,Tno_jtf,Tname_jtf,Inum_jtf,Cno_jtf,Onum_jtf;
+    JComboBox SID_jcb,Gname_jcb,Wno_jcb,Cname_jcb;
     JButton enter_jb,cancle_jb;
     Vector v1,v2,v3,v4;
     JPanel jp;
@@ -25,6 +25,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
 
     public Output_add()
     {
+        SID = new JLabel("货物批次");
         Gno = new JLabel("货物编号");
         Gname = new JLabel("货物名称");
         Tno = new JLabel("货物类型号");
@@ -89,6 +90,11 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
         Wno_jcb.setSelectedIndex(-1);
         Wno_jcb.addItemListener(this);
 
+        SID_jcb = new JComboBox();
+        SID_jcb.setPreferredSize(new Dimension(120,18));
+        SID_jcb.setSelectedIndex(-1);
+        SID_jcb.addItemListener(this);
+
         jp = new JPanel(new FlowLayout());
         jp.add(Gno);
         jp.add(Gno_jtf);
@@ -100,6 +106,8 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
         jp.add(Tname_jtf);
         jp.add(Wno);
         jp.add(Wno_jcb);
+        jp.add(SID);
+        jp.add(SID_jcb);
         jp.add(Inum);
         jp.add(Inum_jtf);
         jp.add(Cno);
@@ -134,7 +142,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
 //        this.add(cancle_jb);
         this.add(jp);
         this.setTitle("出库操作");
-        this.setSize(280,360);
+        this.setSize(280,380);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -145,7 +153,8 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == enter_jb)
         {
-            if(Wno_jcb.getSelectedItem()==null ||Gname_jcb.getSelectedItem()==null || Cname_jcb.getSelectedItem() == null || Onum_jtf.getText()==null)
+            if(SID_jcb.getSelectedItem() == null || Wno_jcb.getSelectedItem()==null
+                    ||Gname_jcb.getSelectedItem()==null || Cname_jcb.getSelectedItem() == null || Onum_jtf.getText()==null)
             {
                 JOptionPane.showMessageDialog(this,"请补全空白项");
                 return;
@@ -157,6 +166,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
             }
 
             Vector v = new Vector();
+            v.addElement((String)SID_jcb.getSelectedItem());
             v.addElement((String)Gno_jtf.getText());
             v.addElement((String)Gname_jcb.getSelectedItem());
             v.addElement((String)Tno_jtf.getText());
@@ -178,6 +188,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
                 Gname_jcb.setSelectedIndex(-1);
                 Wno_jcb.setSelectedIndex(-1);
                 Cname_jcb.setSelectedIndex(-1);
+                SID_jcb.setSelectedIndex(-1);
                 Gno_jtf.setText("");
                 Tno_jtf.setText("");
                 Inum_jtf.setText("");
@@ -192,6 +203,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
             Gname_jcb.setSelectedIndex(-1);
             Wno_jcb.setSelectedIndex(-1);
             Cname_jcb.setSelectedIndex(-1);
+            SID_jcb.setSelectedIndex(-1);
             Gno_jtf.setText("");
             Tno_jtf.setText("");
             Inum_jtf.setText("");
@@ -230,7 +242,7 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
             {
                 Wno_jcb.addItem((String)vv.get(i));
             }
-            Wno_jcb.setSelectedIndex(0);
+            Wno_jcb.setSelectedIndex(-1);
 
         }
         else if(e.getItemSelectable() == Cname_jcb)
@@ -248,19 +260,43 @@ public class Output_add extends JFrame implements ActionListener,ItemListener{
         {
             String Wno = (String)Wno_jcb.getSelectedItem();
             String Gno = (String)Gno_jtf.getText();
+
+            Message m = new Message();
+            m.setMesType(MessageType.message_select_store_SID);
+            ClientUser clientUser = new ClientUser();
+            Vector vv = clientUser.getTable(m);
+            SID_jcb.removeAllItems();
+            for(int i = 1;i<vv.size();i+=3)
+            {
+                if(vv.get(i).equals(Gno) && vv.get(i+1).equals(Wno))
+                {
+                    SID_jcb.addItem(vv.get(i-1));
+                }
+            }
+            SID_jcb.setSelectedIndex(-1);
+            Inum_jtf.setText("");
+
+        }
+        else if(e.getItemSelectable() == SID_jcb)
+        {
+            String Wno = (String)Wno_jcb.getSelectedItem();
+            String Gno = (String)Gno_jtf.getText();
+            String SID = (String)SID_jcb.getSelectedItem();
+
             Message ms = new Message();
-            ms.setMesType(MessageType.message_select_storeTable);
+            ms.setMesType(MessageType.message_select_storeTable_detl);
             ClientUser clientUser = new ClientUser();
             Vector v = clientUser.getTable(ms);
 
 //            System.out.println(v);
-            for(int i = 0;i<v.size();i=i+6)
+            for(int i = 0;i<v.size();i=i+10)
             {
-                if(v.get(i).equals(Gno) && v.get(i+4).equals(Wno))
+                if(v.get(i).equals(SID) && v.get(i+1).equals(Gno) && v.get(i+5).equals(Wno))
                 {
-                    Inum_jtf.setText(String.valueOf(v.get(i+5)));
+                    Inum_jtf.setText(String.valueOf(v.get(i+7)));
                 }
             }
+
         }
     }
 

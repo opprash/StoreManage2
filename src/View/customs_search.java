@@ -20,12 +20,13 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
-    JButton search_jb,add_jb,delete_jb;
+    JButton search_jb,add_jb,delete_jb,update_jb;
     JTable table;
     JScrollPane jsp;
     JComboBox jcb;
     JPanel jp1,jp2,jp3;
     String Cno;
+    int row = -1;
 
     public customs_search(User u)
     {
@@ -75,11 +76,15 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
         add_jb.addActionListener(this);
         delete_jb = new JButton("删除客户");
         delete_jb.addActionListener(this);
+        update_jb = new JButton("修改客户");
+        update_jb.addActionListener(this);
         if(u.getType() == 3)
         {
+            update_jb.setEnabled(false);
             add_jb.setEnabled(false);
             delete_jb.setEnabled(false);
         }
+        jp3.add(update_jb);
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -155,6 +160,21 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
             }
             else JOptionPane.showMessageDialog(this,"删除失败");
         }
+        else if(e.getSource() == update_jb)
+        {
+            if(row == -1)
+            {
+                JOptionPane.showMessageDialog(this,"请选择客户");
+                return;
+            }
+            Vector v = new Vector();
+            v.addElement(Cno);
+            v.addElement(String.valueOf(table.getValueAt(row,1)));
+//            v.addElement(String.valueOf(table.getValueAt(row,2)));
+            v.addElement(String.valueOf(table.getValueAt(row,3)));
+            v.addElement(String.valueOf(table.getValueAt(row,4)));
+            new customs_update(v);
+        }
     }
 
     @Override
@@ -166,7 +186,7 @@ public class customs_search extends JInternalFrame implements ActionListener,Mou
     public void mousePressed(MouseEvent e) {
         if(e.getSource() == table)
         {
-            int row = table.getSelectedRow();
+            row = table.getSelectedRow();
             Cno = String.valueOf(table.getValueAt(row,0));
         }
     }

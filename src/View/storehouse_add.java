@@ -123,8 +123,8 @@ public class storehouse_add extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args)
-    {
-        new storehouse_add();
-    }
+//    public static void main(String[] args)
+//    {
+//        new storehouse_add();
+//    }
 }

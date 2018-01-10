@@ -49,7 +49,7 @@ public class Input_search extends JInternalFrame implements ActionListener{
         jp2 = new JPanel();
         jsp = new JScrollPane();
         table = new JTable();
-        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物编号","货物名称","类型码","类型名称","供应商编号","仓存编号","入库数量","时间"}));
+        table.setModel(new DefaultTableModel(new Object[][]{},new String[]{"货物编号","货物名称","类型码","类型名称","供应商编号","仓存编号","仓库名称","入库数量","时间"}));
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class,r);
@@ -101,11 +101,11 @@ public class Input_search extends JInternalFrame implements ActionListener{
         ClientUser clientUser = new ClientUser();
 
         Vector v = clientUser.getTable(ms);
-        for(int i=0;i<v.size()/8;i++)
+        for(int i=0;i<v.size()/9;i++)
         {
             Vector v2 = new Vector();
-            for (int j=0;j<8;j++) {
-                v2.addElement(v.get(j+i*8));
+            for (int j=0;j<9;j++) {
+                v2.addElement(v.get(j+i*9));
             }
             dtm.addRow(v2);
         }

@@ -12,12 +12,15 @@
     <file url="file://$PROJECT_DIR$/src/View/UserManage.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/customs_add.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/customs_search.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/View/customs_update.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/registerFrm.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/store_detl_search.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/store_search.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/storehouse_add.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/storehouse_search.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/View/storehouse_update.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/supplier_add.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/View/supplier_search.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/View/supplier_update.java" charset="GBK" />
   </component>
 </project>

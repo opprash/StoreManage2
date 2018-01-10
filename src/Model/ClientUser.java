@@ -27,5 +27,4 @@ public class ClientUser {
         return new ClientConServer().SendInfoToServer(ms);
     }
 
-
 }

@@ -21,12 +21,13 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
-    JButton search_jb,add_jb,delete_jb;
+    JButton search_jb,add_jb,delete_jb,update_jb;
     JTable table;
     JScrollPane jsp;
     JComboBox jcb;
-    JPanel jp1,jp2,jp3;
+    JPanel jp,jp1,jp2,jp3;
     String Sno;
+    int row = -1;
 
     public supplier_search(User u)
     {
@@ -40,6 +41,7 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
 
     void init(User u)
     {
+//        jp = new JPanel();
         jp1 = new JPanel();
         search_jbl = new JLabel("供应商编号:");
         keywords_jtf = new JTextField(20);
@@ -48,6 +50,7 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
         jp1.add(search_jbl);
         jp1.add(keywords_jtf);
         jp1.add(search_jb);
+//        jp1.add(jp,"East");
 
         jp2 = new JPanel();
         jsp = new JScrollPane();
@@ -76,11 +79,15 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
         add_jb.addActionListener(this);
         delete_jb = new JButton("删除供应商");
         delete_jb.addActionListener(this);
+        update_jb = new JButton("修改供应商");
+        update_jb.addActionListener(this);
         if(u.getType() == 3)
         {
+            update_jb.setEnabled(false);
             add_jb.setEnabled(false);
             delete_jb.setEnabled(false);
         }
+        jp3.add(update_jb);
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -162,6 +169,20 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
             }
             else JOptionPane.showMessageDialog(this,"删除失败");
         }
+        else if(e.getSource() == update_jb)
+        {
+            if(row == -1)
+            {
+                JOptionPane.showMessageDialog(this,"请选择供应商");
+                return;
+            }
+            Vector v = new Vector();
+            v.addElement(Sno);
+            v.addElement(String.valueOf(table.getValueAt(row,1)));
+            v.addElement(String.valueOf(table.getValueAt(row,2)));
+            v.addElement(String.valueOf(table.getValueAt(row,3)));
+            new supplier_update(v);
+        }
     }
 
     @Override
@@ -173,7 +194,7 @@ public class supplier_search extends JInternalFrame implements ActionListener,Mo
     public void mousePressed(MouseEvent e) {
         if(e.getSource() == table)
         {
-            int row = table.getSelectedRow();
+            row = table.getSelectedRow();
             Sno = String.valueOf(table.getValueAt(row,0));
         }
     }

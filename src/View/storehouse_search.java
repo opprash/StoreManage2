@@ -20,12 +20,13 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
 
     JLabel search_jbl,keywords_jbl,jbl3,jbl4,jbl5,jbl6;
     JTextField keywords_jtf;
-    JButton search_jb,add_jb,delete_jb;
+    JButton search_jb,add_jb,delete_jb,update_jb;
     JTable table;
     JScrollPane jsp;
     JComboBox jcb;
     JPanel jp1,jp2,jp3;
     String Wno;
+    int row = -1;
 
     public storehouse_search(User u)
     {
@@ -76,11 +77,15 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
         add_jb.addActionListener(this);
         delete_jb = new JButton("É¾³ý²Ö¿â");
         delete_jb.addActionListener(this);
+        update_jb = new JButton("ÐÞ¸Ä²Ö¿â");
+        update_jb.addActionListener(this);
         if(u.getType() == 3)
         {
+            update_jb.setEnabled(false);
             add_jb.setEnabled(false);
             delete_jb.setEnabled(false);
         }
+        jp3.add(update_jb);
         jp3.add(add_jb);
         jp3.add(delete_jb);
 
@@ -156,13 +161,27 @@ public class storehouse_search extends JInternalFrame implements ActionListener,
             }
             else JOptionPane.showMessageDialog(this,"É¾³ýÊ§°Ü");
         }
+        else if(e.getSource() == update_jb)
+        {
+            if(row == -1)
+            {
+                JOptionPane.showMessageDialog(this,"ÇëÑ¡Ôñ²Ö¿â");
+                return;
+            }
+            Vector v = new Vector();
+            v.addElement(Wno);
+            v.addElement(String.valueOf(table.getValueAt(row,1)));
+//            v.addElement(String.valueOf(table.getValueAt(row,2)));
+            v.addElement(String.valueOf(table.getValueAt(row,5)));
+            new storehouse_update(v);
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == table)
         {
-            int row = table.getSelectedRow();
+            row = table.getSelectedRow();
             Wno = String.valueOf(table.getValueAt(row,0));
         }
     }

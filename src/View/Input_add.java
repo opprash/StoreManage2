@@ -159,6 +159,7 @@ public class Input_add extends JFrame implements ActionListener,ItemListener{
             v.addElement((String)Tname_jtf.getText());
             v.addElement((String)Sno_jtf.getText());
             v.addElement((String)Wno_jtf.getText());
+            v.addElement((String)Wname_jcb.getSelectedItem());
             v.addElement((String)Inum_jtf.getText());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 //            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
