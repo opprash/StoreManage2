@@ -18,6 +18,7 @@ public class customs_add extends JFrame implements ActionListener {
     JTextField Cno_jtf,Cname_jtf,Caddr_jtf,Ctel_jtf;
     JComboBox Csex_jcb;
     JButton enter_jb,cancle_jb;
+    JPanel jp;
 
     public customs_add()
     {
@@ -41,15 +42,24 @@ public class customs_add extends JFrame implements ActionListener {
         Csex_jcb.setPreferredSize(new Dimension(155,18));
         Csex_jcb.setSelectedIndex(0);
 
-        this.setLayout(new FlowLayout());
+        jp = new JPanel(new FlowLayout());
+        jp.add(Cno);jp.add(Cno_jtf);
+        jp.add(Cname);jp.add(Cname_jtf);
+        jp.add(Csex);jp.add(Csex_jcb);
+        jp.add(Caddr);jp.add(Caddr_jtf);
+        jp.add(Ctel);jp.add(Ctel_jtf);
+        jp.add(enter_jb);jp.add(cancle_jb);
+
+//        this.setLayout(new FlowLayout());
         this.setTitle("Ìí¼Ó¿Í»§");
-        this.add(Cno);this.add(Cno_jtf);
-        this.add(Cname);this.add(Cname_jtf);
-        this.add(Csex);this.add(Csex_jcb);
-        this.add(Caddr);this.add(Caddr_jtf);
-        this.add(Ctel);this.add(Ctel_jtf);
-        this.add(enter_jb);this.add(cancle_jb);
-        this.setSize(250,150);
+        this.add(jp);
+//        this.add(Cno);this.add(Cno_jtf);
+//        this.add(Cname);this.add(Cname_jtf);
+//        this.add(Csex);this.add(Csex_jcb);
+//        this.add(Caddr);this.add(Caddr_jtf);
+//        this.add(Ctel);this.add(Ctel_jtf);
+//        this.add(enter_jb);this.add(cancle_jb);
+        this.setSize(300,250);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

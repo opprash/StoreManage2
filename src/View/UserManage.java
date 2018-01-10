@@ -110,9 +110,9 @@ public class UserManage extends JFrame implements ActionListener,MouseListener{
         this.add(jp2,"Center");
         this.add(jp3,"South");
         this.setTitle("用户管理");
-        this.setSize(500,300);
+        this.setSize(500,400);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }

@@ -17,6 +17,7 @@ public class storehouse_add extends JFrame implements ActionListener {
     JLabel Wno,Wname,Wsize,Wu_size,Wa_size,Waddr;
     JTextField Wno_jtf,Wname_jtf,Wsize_jtf,Wu_size_jtf,Waddr_jtf;
     JButton enter_jb,cancle_jb;
+    JPanel jp;
 
     public storehouse_add()
     {
@@ -36,16 +37,24 @@ public class storehouse_add extends JFrame implements ActionListener {
         cancle_jb = new JButton("÷ÿ÷√");
         cancle_jb.addActionListener(this);
 
+        jp = new JPanel(new FlowLayout());
+        jp.add(Wno);jp.add(Wno_jtf);
+        jp.add(Wname);jp.add(Wname_jtf);
+        jp.add(Wsize);jp.add(Wsize_jtf);
+        jp.add(Wu_size);jp.add(Wu_size_jtf);
+        jp.add(Waddr);jp.add(Waddr_jtf);
+        jp.add(enter_jb);jp.add(cancle_jb);
 
-        this.setLayout(new FlowLayout());
+//        this.setLayout(new FlowLayout());
         this.setTitle("ÃÌº”≤÷ø‚");
-        this.add(Wno);this.add(Wno_jtf);
-        this.add(Wname);this.add(Wname_jtf);
-        this.add(Wsize);this.add(Wsize_jtf);
-        this.add(Wu_size);this.add(Wu_size_jtf);
-        this.add(Waddr);this.add(Waddr_jtf);
-        this.add(enter_jb);this.add(cancle_jb);
-        this.setSize(250,145);
+        this.add(jp);
+//        this.add(Wno);this.add(Wno_jtf);
+//        this.add(Wname);this.add(Wname_jtf);
+//        this.add(Wsize);this.add(Wsize_jtf);
+//        this.add(Wu_size);this.add(Wu_size_jtf);
+//        this.add(Waddr);this.add(Waddr_jtf);
+//        this.add(enter_jb);this.add(cancle_jb);
+        this.setSize(300,260);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

@@ -16,6 +16,7 @@ public class supplier_add extends JFrame implements ActionListener {
     JLabel Sno,Sname,Saddr,Stel;
     JTextField Sno_jtf,Sname_jtf,Saddr_jtf,Stel_jtf;
     JButton enter_jb,cancle_jb;
+    JPanel jp;
 
     public supplier_add()
     {
@@ -32,14 +33,22 @@ public class supplier_add extends JFrame implements ActionListener {
         cancle_jb = new JButton("重置");
         cancle_jb.addActionListener(this);
 
-        this.setLayout(new FlowLayout());
+        jp = new JPanel(new FlowLayout());
+        jp.add(Sno);jp.add(Sno_jtf);
+        jp.add(Sname);jp.add(Sname_jtf);
+        jp.add(Saddr);jp.add(Saddr_jtf);
+        jp.add(Stel);jp.add(Stel_jtf);
+        jp.add(enter_jb);jp.add(cancle_jb);
+
+//        this.setLayout(new FlowLayout());
         this.setTitle("添加供应商");
-        this.add(Sno);this.add(Sno_jtf);
-        this.add(Sname);this.add(Sname_jtf);
-        this.add(Saddr);this.add(Saddr_jtf);
-        this.add(Stel);this.add(Stel_jtf);
-        this.add(enter_jb);this.add(cancle_jb);
-        this.setSize(280,120);
+        this.add(jp);
+//        this.add(Sno);this.add(Sno_jtf);
+//        this.add(Sname);this.add(Sname_jtf);
+//        this.add(Saddr);this.add(Saddr_jtf);
+//        this.add(Stel);this.add(Stel_jtf);
+//        this.add(enter_jb);this.add(cancle_jb);
+        this.setSize(300,230);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

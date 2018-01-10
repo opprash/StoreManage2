@@ -54,7 +54,7 @@ public class registerFrm extends JFrame implements ActionListener{
         this.add(jp3);
         this.add(jp4);
         this.add(jp5);
-        this.setSize(300,200);
+        this.setSize(300,250);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
